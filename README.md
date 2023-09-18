@@ -1,7 +1,14 @@
 # Simple-GAN-MNIST
-Pytorch implementation of a simple Generative Adversarial Network on the MNIST dataset.
+A minimal Pytorch implementation of a Slicing Adversarial Network by Sony.
 
-# Requirements
+Arxiv : [SAN: Inducing Metrizability of GAN with Discriminative Normalized Linear Layer](https://arxiv.org/abs/2301.12811)
+
+# Status
+
+Ongoing...
+
+
+<!-- # Requirements
 - Python 3.8.5
 - pytorch 1.6.0
 - torchvision 0.7.0
@@ -42,4 +49,4 @@ Alternatively you may want to specify
 Learning curves for the discriminator and generator can be inspected using
 tensorboard. 
 ![fake images](assets/fake_numbers.png)
-*Example fake numbers from training with the hyperparameters specifed above.*
+*Example fake numbers from training with the hyperparameters specifed above.* -->
