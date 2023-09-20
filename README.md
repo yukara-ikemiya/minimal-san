@@ -1,7 +1,8 @@
 # Minimal-SAN
 A minimal Pytorch implementation of a Slicing Adversarial Network by Sony.
 
-Arxiv : [SAN: Inducing Metrizability of GAN with Discriminative Normalized Linear Layer](https://arxiv.org/abs/2301.12811)
+- Paper (arxiv) : [SAN: Inducing Metrizability of GAN with Discriminative Normalized Linear Layer](https://arxiv.org/abs/2301.12811)
+- Official codes : [StyleSAN-XL](https://github.com/sony/san)
 
 # Summary
 
