@@ -9,3 +9,6 @@ __pycache__
 
 # tensorboard
 tensorboard/
+
+job/
+logs/
