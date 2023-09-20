@@ -26,11 +26,12 @@ def update_discriminator(x, class_ids, discriminator, generator, optimizer, para
     loss_real = discriminator(x, class_ids, loss_type='D_real')
 
     # predictions on fake distribution
-    latent = torch.randn(bs, params["dim_latent"], device=device)
-    batch_fake = generator(latent, class_ids)
-    loss_fake = discriminator(batch_fake.detach(), class_ids, loss_type='D_fake')
+    num_fake = int(bs * params['fake_sample_rate'])
+    latent = torch.randn(num_fake, params["dim_latent"], device=device)
+    batch_fake = generator(latent, class_ids[:num_fake])
+    loss_fake = discriminator(batch_fake.detach(), class_ids[:num_fake], loss_type='D_fake')
 
-    loss_d = (loss_real + loss_fake) / 2.
+    loss_d = (loss_real + loss_fake) / ((bs + num_fake) / bs)
     loss_d.backward()
     optimizer.step()
 

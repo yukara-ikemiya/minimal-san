@@ -43,7 +43,7 @@ class Discriminator(nn.Module):
         if 'gan' == self.model_type:
             logits = (x * weights).sum(dim=1)  # (bs,)
             if 'G' == loss_type:
-                loss = (- logits).mean()
+                loss = - logits.mean()
             elif 'D_real' == loss_type:
                 loss = (1 - logits).relu().mean()
             else:  # 'D_fake
@@ -51,14 +51,17 @@ class Discriminator(nn.Module):
         elif 'san' == self.model_type:
             weights = F.normalize(weights, dim=1)
             if 'G' == loss_type:
-                logits = x * weights
-                loss = (- logits).mean()
+                logits = (x * weights).sum(dim=1)
+                loss = - logits.mean()
+
             elif 'D_real' == loss_type:
-                logits = x * weights.detach() + x.detach() * weights
-                loss = (- logits).mean()
+                loss_h = (1 - (x * weights.detach()).sum(dim=1)).relu().mean()
+                loss_w = - (x.detach() * weights).sum(dim=1).mean()
+                loss = (loss_h + loss_w) / 2.
             else:  # 'D_fake
-                logits = x * weights.detach() + x.detach() * weights
-                loss = logits.mean()
+                loss_h = (1 + (x * weights.detach()).sum(dim=1)).relu().mean()
+                loss_w = (x.detach() * weights).sum(dim=1).mean()
+                loss = (loss_h + loss_w) / 2.
         else:
             raise NotImplementedError
 

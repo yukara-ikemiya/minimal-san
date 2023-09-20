@@ -23,6 +23,8 @@ Let's boost your GANs application by using SAN.
 
 # Training
 
+Make sure to download the MNIST dataset.
+
 ## 1) Hyperparameters
 Specify hyperparameters inside a .json file, e.g.:
 
