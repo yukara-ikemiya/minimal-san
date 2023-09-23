@@ -30,12 +30,13 @@ Specify hyperparameters inside a .json file, e.g.:
 
 ```json
 {
-    "dim_latent": 100,
-    "batch_size": 64,
-    "learning_rate": 0.0002,
-    "beta_1": 0.5,
-    "beta_2": 0.999,
-    "num_epochs": 200
+  "dim_latent": 100,
+  "batch_size": 128,
+  "fake_sample_rate": 0.5,
+  "learning_rate": 0.001,
+  "beta_1": 0.0,
+  "beta_2": 0.99,
+  "num_epochs": 200
 }
 ```
 
