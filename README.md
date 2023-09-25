@@ -95,14 +95,14 @@ GAN          |  SAN
 ## Training curve
 
 GAN
-- Light blue: no cond
-- Blue: class cond
+- Red : no cond
+- Orange : class cond
 
 ![](assets/train_curve_gan.png)
 
 SAN
-- Red: no cond
-- Orange: class cond
+- Light blue : no cond
+- Blue : class cond
 
 ![](assets/train_curve_san.png)
 

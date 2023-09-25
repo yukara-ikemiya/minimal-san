@@ -53,7 +53,6 @@ class Discriminator(nn.Module):
             if 'G' == loss_type:
                 logits = (x * weights).sum(dim=1)
                 loss = - logits.mean()
-
             elif 'D_real' == loss_type:
                 loss_h = (1 - (x * weights.detach()).sum(dim=1)).relu().mean()
                 loss_w = - (x.detach() * weights).sum(dim=1).mean()
