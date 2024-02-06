@@ -11,8 +11,9 @@ from models.generator import Generator
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import matplotlib
-import torchvision.utils as torch_utils
 
+import torchvision.utils as torch_utils
+import torch
 
 def get_args():
     parser = argparse.ArgumentParser(description="Inference script for GAN/SAN",
@@ -21,7 +22,6 @@ def get_args():
     parser.add_argument("--model", type=str, default="gan", help="model's name / 'gan' or 'san'")
     parser.add_argument('--disable_class', action='store_true', help='disable class conditioning')
     parser.add_argument("--logdir", type=str, default="./logs", help="directory storing log files")
-    parser.add_argument("--device", type=int, default=0, help="gpu device to use")
     parser.add_argument("--num_samples_per_class", type=int, default=8,
                         help="number of samples to generate during test")
     parser.add_argument("--ffmpeg", type=str, required=True, help="ffmpeg path")
@@ -36,7 +36,9 @@ def main(args):
     with open(args.params, "r") as f:
         params = json.load(f)
 
-    device = f'cuda:{args.device}' if args.device is not None and args.device  != -1 else 'cpu'
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print(f'Using device: {device}')
+    
     model_name = args.model
     if not model_name in ['gan', 'san']:
         raise RuntimeError("A model name have to be 'gan' or 'san'.")
@@ -51,7 +53,7 @@ def main(args):
 
 
     ckpt_dir = f'{args.logdir}/{model_name}/'
-    if device != 'cpu':
+    if str(device) != 'cpu':
         generator.torch.load_state_dict(torch.load(ckpt_dir + model_name + ".generator.pt"))
     else:
         generator.load_state_dict(torch.load(ckpt_dir + model_name + ".generator.pt",
