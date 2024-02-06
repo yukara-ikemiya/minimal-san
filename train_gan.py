@@ -119,6 +119,7 @@ def main(args):
     if not os.path.exists(ckpt_dir):
         os.mkdir(ckpt_dir)
     if not os.path.exists(tb_dir):
+        os.mkdir(f'{args.logdir}/tensorboard/')
         os.mkdir(tb_dir)
     writer = SummaryWriter(tb_dir)
 
